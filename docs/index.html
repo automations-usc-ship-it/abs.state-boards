@@ -173,15 +173,8 @@
     border: 1px solid rgba(0,0,0,0.06);
     overflow: hidden;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-  thead {
-    background: #f8fafc;
-    border-bottom: 1px solid #e5e7eb;
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: #f8fafc; border-bottom: 1px solid #e5e7eb; }
   th {
     padding: 12px 16px;
     text-align: left;
@@ -192,11 +185,7 @@
     color: var(--subtext);
     white-space: nowrap;
   }
-  td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f1f5f9;
-    vertical-align: middle;
-  }
+  td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbfd; }
 
@@ -335,24 +324,20 @@
       document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
       document.getElementById('stat-total').textContent = data.total;
 
-      const altActive = data.results.filter(r => r.url_alt_status === 'active').length;
-      const altInactive = data.results.filter(r => r.url_alt_status === 'inactive').length;
-      const combinedActive = data.active + altActive;
-      const combinedInactive = data.inactive + altInactive;
-      const totalLinks = data.results.reduce((acc, r) => {
-        acc += 1;
-        if (r.url_alt_status !== null && r.url_alt_status !== undefined) acc += 1;
-        return acc;
-      }, 0);
+      // Per-state logic: active if primary OR alt is active
+      const stateActive = data.results.filter(r =>
+        r.url_status === 'active' || r.url_alt_status === 'active'
+      ).length;
+      const stateInactive = data.total - stateActive;
 
-      document.getElementById('stat-active').textContent = combinedActive;
-      document.getElementById('stat-inactive').textContent = combinedInactive;
+      document.getElementById('stat-active').textContent = stateActive;
+      document.getElementById('stat-inactive').textContent = stateInactive;
       document.getElementById('stat-phone').textContent = data.phone_required;
 
-      const pct = totalLinks ? Math.round((combinedActive / totalLinks) * 100) : 0;
+      const pct = data.total ? Math.round((stateActive / data.total) * 100) : 0;
       document.getElementById('health-fill').style.width = pct + '%';
       document.getElementById('health-label').textContent =
-        `Overall Link Health: ${pct}% active (${combinedActive} of ${totalLinks} total links responding)`;
+        `Overall Link Health: ${pct}% — ${stateActive} of ${data.total} states have at least one working link`;
 
       allResults = data.results;
       renderTable();
