@@ -24,6 +24,7 @@
     --gray-bg: #f3f4f6;
     --blue: #2563eb;
     --blue-bg: #dbeafe;
+    --note-bg: #fefce8;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +34,13 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+  }
+
+  .sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
 
   .header {
@@ -71,6 +79,40 @@
     flex-wrap: wrap;
   }
   .header-meta span strong { color: rgba(255,255,255,0.8); }
+
+  .sticky-controls {
+    background: var(--white);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 40px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1.5px solid #d1d5db;
+    background: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--subtext);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+  .search-input {
+    margin-left: auto;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #d1d5db;
+    font-size: 13px;
+    width: 220px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--navy); }
 
   .body { padding: 28px 40px; }
 
@@ -134,38 +176,6 @@
     transition: width 0.6s ease;
   }
 
-  .controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filter-btn {
-    padding: 7px 16px;
-    border-radius: 8px;
-    border: 1.5px solid #d1d5db;
-    background: var(--white);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--subtext);
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
-  .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
-  .search-input {
-    margin-left: auto;
-    padding: 7px 14px;
-    border-radius: 8px;
-    border: 1.5px solid #d1d5db;
-    font-size: 13px;
-    width: 220px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .search-input:focus { border-color: var(--navy); }
-
   .table-wrap {
     background: var(--white);
     border-radius: 12px;
@@ -174,7 +184,16 @@
     overflow: hidden;
   }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead { background: #f8fafc; border-bottom: 1px solid #e5e7eb; }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  thead tr {
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+  }
   th {
     padding: 12px 16px;
     text-align: left;
@@ -184,10 +203,13 @@
     text-transform: uppercase;
     color: var(--subtext);
     white-space: nowrap;
+    background: #f8fafc;
+    box-shadow: 0 1px 0 #e5e7eb;
   }
   td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbfd; }
+  tr:hover td.notes-cell { background: #fef9c3; }
 
   .state-name { font-weight: 700; color: var(--text); white-space: nowrap; }
   .phone-cell { font-size: 12px; color: var(--subtext); white-space: nowrap; }
@@ -224,7 +246,15 @@
   .url-link:hover { text-decoration: underline; }
   .url-cell { max-width: 220px; }
   .response-time { font-size: 11px; color: var(--subtext); margin-top: 3px; }
-  .notes-cell { font-size: 11px; color: var(--subtext); max-width: 180px; line-height: 1.4; }
+
+  .notes-cell {
+    font-size: 11px;
+    color: #78350f;
+    max-width: 200px;
+    line-height: 1.4;
+    background: var(--note-bg);
+    border-left: 3px solid #fde68a;
+  }
 
   .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--subtext); }
   .empty-state { text-align: center; padding: 48px; color: var(--subtext); font-size: 14px; }
@@ -232,20 +262,32 @@
   @media (max-width: 900px) {
     .body { padding: 20px 16px; }
     .header { padding: 20px 16px; }
+    .sticky-controls { padding: 10px 16px; }
     .search-input { width: 100%; margin-left: 0; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-label">USClaims Pre-Settlement Funding · Internal Tool</div>
-  <h1>State Bar Link Monitor</h1>
-  <div class="header-meta">
-    <span><strong>Process:</strong> Attorney Bar Search (ABS)</span>
-    <span><strong>Schedule:</strong> Weekdays 9 AM &amp; 3 PM EST</span>
-    <span><strong>Last Scan:</strong> <span id="last-scan">Loading…</span></span>
-    <span><strong>Source:</strong> lawyerlegion.com</span>
+<div class="sticky-top">
+  <div class="header">
+    <div class="header-label">USC · ABS · Internal Tool V1.2</div>
+    <h1>State Bar Link Monitor</h1>
+    <div class="header-meta">
+      <span><strong>Process:</strong> Attorney Bar Search (ABS)</span>
+      <span><strong>Run Schedule:</strong> Every 3 hrs, 9 AM – 9 PM EST</span>
+      <span><strong>Last Scan:</strong> <span id="last-scan">Loading…</span></span>
+      <span><strong>Source:</strong> SMD Automation Team</span>
+    </div>
+  </div>
+
+  <div class="sticky-controls">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('active', this)">Active Only</button>
+    <button class="filter-btn" onclick="setFilter('inactive', this)">Inactive Only</button>
+    <button class="filter-btn" onclick="setFilter('phone', this)">Phone Required</button>
+    <button class="filter-btn" onclick="setFilter('has_alt', this)">Has Alt Link</button>
+    <input class="search-input" type="text" placeholder="Search state…" oninput="setSearch(this.value)">
   </div>
 </div>
 
@@ -277,15 +319,6 @@
     </div>
   </div>
 
-  <div class="controls">
-    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
-    <button class="filter-btn" onclick="setFilter('active', this)">Active Only</button>
-    <button class="filter-btn" onclick="setFilter('inactive', this)">Inactive Only</button>
-    <button class="filter-btn" onclick="setFilter('phone', this)">Phone Required</button>
-    <button class="filter-btn" onclick="setFilter('has_alt', this)">Has Alt Link</button>
-    <input class="search-input" type="text" placeholder="Search state…" oninput="setSearch(this.value)">
-  </div>
-
   <div class="table-wrap">
     <table>
       <thead>
@@ -294,9 +327,9 @@
           <th>Phone</th>
           <th>Primary Status</th>
           <th>Primary URL</th>
-          <th>Alt Status</th>
           <th>Alternative URL</th>
-          <th>Notes</th>
+          <th>Alt Status</th>
+          <th>Special Notes</th>
         </tr>
       </thead>
       <tbody id="table-body">
@@ -308,7 +341,7 @@
 </div>
 
 <div class="footer">
-  USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by GitHub Actions
+  USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team
 </div>
 
 <script>
@@ -324,7 +357,6 @@
       document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
       document.getElementById('stat-total').textContent = data.total;
 
-      // Per-state logic: active if primary OR alt is active
       const stateActive = data.results.filter(r =>
         r.url_status === 'active' || r.url_alt_status === 'active'
       ).length;
@@ -426,8 +458,8 @@
         <td class="phone-cell">${phoneHtml}</td>
         <td>${statusPill(r.url_status, r.url_http_code, r.url_response_ms)}</td>
         <td class="url-cell">${urlCell(r.url, null)}</td>
-        <td>${statusPill(r.url_alt_status, r.url_alt_http_code, r.url_alt_response_ms)}</td>
         <td class="url-cell">${urlCell(r.url_alt, r.url_alt_label)}</td>
+        <td>${statusPill(r.url_alt_status, r.url_alt_http_code, r.url_alt_response_ms)}</td>
         <td class="notes-cell">${r.notes || '—'}</td>
       </tr>`;
     }).join('');
