@@ -200,16 +200,8 @@
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbfd; }
 
-  .state-name {
-    font-weight: 700;
-    color: var(--text);
-    white-space: nowrap;
-  }
-  .phone-cell {
-    font-size: 12px;
-    color: var(--subtext);
-    white-space: nowrap;
-  }
+  .state-name { font-weight: 700; color: var(--text); white-space: nowrap; }
+  .phone-cell { font-size: 12px; color: var(--subtext); white-space: nowrap; }
   .phone-required-badge {
     display: inline-block;
     font-size: 9px;
@@ -239,39 +231,14 @@
   .status-pill.no-alt { background: var(--gray-bg); color: var(--gray); }
   .status-pill.none { background: var(--gray-bg); color: var(--gray); font-style: italic; }
 
-  .url-link {
-    color: var(--blue);
-    text-decoration: none;
-    font-size: 12px;
-    word-break: break-all;
-  }
+  .url-link { color: var(--blue); text-decoration: none; font-size: 12px; word-break: break-all; }
   .url-link:hover { text-decoration: underline; }
   .url-cell { max-width: 220px; }
+  .response-time { font-size: 11px; color: var(--subtext); margin-top: 3px; }
+  .notes-cell { font-size: 11px; color: var(--subtext); max-width: 180px; line-height: 1.4; }
 
-  .response-time {
-    font-size: 11px;
-    color: var(--subtext);
-    margin-top: 3px;
-  }
-  .notes-cell {
-    font-size: 11px;
-    color: var(--subtext);
-    max-width: 180px;
-    line-height: 1.4;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 12px;
-    color: var(--subtext);
-  }
-  .empty-state {
-    text-align: center;
-    padding: 48px;
-    color: var(--subtext);
-    font-size: 14px;
-  }
+  .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--subtext); }
+  .empty-state { text-align: center; padding: 48px; color: var(--subtext); font-size: 14px; }
 
   @media (max-width: 900px) {
     .body { padding: 20px 16px; }
@@ -301,15 +268,15 @@
       <div class="stat-value" id="stat-total">—</div>
     </div>
     <div class="stat-card green">
-      <div class="stat-label">Primary Active</div>
+      <div class="stat-label">Primary &amp; Alt Active</div>
       <div class="stat-value" id="stat-active">—</div>
     </div>
     <div class="stat-card red">
-      <div class="stat-label">Primary Inactive</div>
+      <div class="stat-label">Primary &amp; Alt Inactive</div>
       <div class="stat-value" id="stat-inactive">—</div>
     </div>
     <div class="stat-card amber">
-      <div class="stat-label">Phone Required</div>
+      <div class="stat-label">State Phone Call Req'd</div>
       <div class="stat-value" id="stat-phone">—</div>
     </div>
   </div>
@@ -367,14 +334,25 @@
 
       document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
       document.getElementById('stat-total').textContent = data.total;
-      document.getElementById('stat-active').textContent = data.active;
-      document.getElementById('stat-inactive').textContent = data.inactive;
+
+      const altActive = data.results.filter(r => r.url_alt_status === 'active').length;
+      const altInactive = data.results.filter(r => r.url_alt_status === 'inactive').length;
+      const combinedActive = data.active + altActive;
+      const combinedInactive = data.inactive + altInactive;
+      const totalLinks = data.results.reduce((acc, r) => {
+        acc += 1;
+        if (r.url_alt_status !== null && r.url_alt_status !== undefined) acc += 1;
+        return acc;
+      }, 0);
+
+      document.getElementById('stat-active').textContent = combinedActive;
+      document.getElementById('stat-inactive').textContent = combinedInactive;
       document.getElementById('stat-phone').textContent = data.phone_required;
 
-      const pct = data.total ? Math.round((data.active / data.total) * 100) : 0;
+      const pct = totalLinks ? Math.round((combinedActive / totalLinks) * 100) : 0;
       document.getElementById('health-fill').style.width = pct + '%';
       document.getElementById('health-label').textContent =
-        `Primary Link Health: ${pct}% active (${data.active} of ${data.total} entries responding)`;
+        `Overall Link Health: ${pct}% active (${combinedActive} of ${totalLinks} total links responding)`;
 
       allResults = data.results;
       renderTable();
