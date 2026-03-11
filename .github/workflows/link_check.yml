@@ -1,8 +1,7 @@
 name: State Bar Link Check
-
 on:
- schedule:
-      - cron: '0 14,17,20,23,2 * * 1-5'
+  schedule:
+    - cron: '0 14,17,20,23,2 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -22,6 +21,9 @@ jobs:
 
       - name: Run link checker
         continue-on-error: true
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: python check_links.py
 
       - name: Commit updated results
