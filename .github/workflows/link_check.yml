@@ -23,7 +23,7 @@ jobs:
         continue-on-error: true
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_APP_PASSWORD: ${{ secrets.ABS_ALERTS_GMAIL_APP_PASSWORD }}
         run: python check_links.py
 
       - name: Commit updated results
