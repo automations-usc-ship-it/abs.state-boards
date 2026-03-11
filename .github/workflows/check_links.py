@@ -7,6 +7,8 @@ import time
 import datetime
 import concurrent.futures
 import os
+import smtplib
+from email.mime.text import MIMEText
 
 INPUT_FILE  = "state_bar_directory.json"
 OUTPUT_FILE = "docs/results.json"
@@ -58,7 +60,6 @@ def check_url(entry):
         error  = str(e)
 
     elapsed = round((time.time() - start) * 1000)
-
     return {
         "state":        state,
         "phone":        entry.get("phone"),
@@ -76,6 +77,29 @@ def check_url(entry):
 def _now():
     return datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
+def send_email(inactive_results):
+    sender   = os.environ.get("GMAIL_USER")
+    password = os.environ.get("GMAIL_APP_PASSWORD")
+    if not sender or not password:
+        print("Email skipped — GMAIL_USER or GMAIL_APP_PASSWORD not set")
+        return
+
+    lines = [
+        f"  • {r['state']}: {r['url']} ({r.get('error') or r.get('http_code')})"
+        for r in inactive_results
+    ]
+    body = "The following state bar links are DOWN:\n\n" + "\n".join(lines)
+
+    msg = MIMEText(body)
+    msg["Subject"] = f"⚠️ {len(inactive_results)} State Bar Link(s) Down"
+    msg["From"]    = sender
+    msg["To"]      = sender
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(sender, password)
+        smtp.send_message(msg)
+    print(f"Alert email sent to {sender}")
+
 def main():
     with open(INPUT_FILE) as f:
         data = json.load(f)
@@ -84,7 +108,6 @@ def main():
     metadata = data.get("metadata", {})
 
     print(f"Checking {len(entries)} URLs...")
-
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         futures = {pool.submit(check_url, e): e for e in entries}
@@ -118,6 +141,8 @@ def main():
 
     print(f"\nDone — {active} active · {inactive} inactive · {skipped} skipped")
     if inactive > 0:
+        inactive_list = [r for r in results if r["status"] == "inactive"]
+        send_email(inactive_list)
         exit(1)
 
 if __name__ == "__main__":
