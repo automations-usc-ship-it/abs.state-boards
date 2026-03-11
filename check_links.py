@@ -3,6 +3,9 @@ import urllib.request
 import urllib.error
 import ssl
 import time
+import os
+import smtplib
+from email.mime.text import MIMEText
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 
@@ -37,10 +40,8 @@ def check_entry(entry):
     state = entry.get("state")
     url = entry.get("url")
     url_alt = entry.get("url_alt")
-
     status, code, ms = check_url(url)
-    
-    # Determine alt status
+
     if url_alt is None:
         alt_status, alt_code, alt_ms = None, None, None
         alt_label = None
@@ -67,6 +68,29 @@ def check_entry(entry):
         "url_alt_http_code": alt_code,
         "url_alt_response_ms": alt_ms,
     }
+
+def send_email(inactive_results):
+    sender   = os.environ.get("GMAIL_USER")
+    password = os.environ.get("GMAIL_APP_PASSWORD")
+    if not sender or not password:
+        print("Email skipped — GMAIL_USER or GMAIL_APP_PASSWORD not set")
+        return
+
+    lines = [
+        f"  • {r['state']}: {r['url']} (HTTP {r.get('url_http_code')})"
+        for r in inactive_results
+    ]
+    body = "The following state bar links are DOWN:\n\n" + "\n".join(lines)
+
+    msg = MIMEText(body)
+    msg["Subject"] = f"⚠️ {len(inactive_results)} State Bar Link(s) Down"
+    msg["From"]    = sender
+    msg["To"]      = f"{sender}, grace@smdigitalpartners.com"
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(sender, password)
+        smtp.send_message(msg)
+    print(f"Alert email sent")
 
 def main():
     with open(INPUT_FILE) as f:
@@ -103,6 +127,8 @@ def main():
     print(f"Results written to {OUTPUT_FILE}")
 
     if any_inactive:
+        inactive_list = [r for r in results if r["url_status"] == "inactive"]
+        send_email(inactive_list)
         exit(1)
 
 if __name__ == "__main__":
