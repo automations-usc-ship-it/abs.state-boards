@@ -24,28 +24,30 @@
     --gray-bg: #f3f4f6;
     --blue: #2563eb;
     --blue-bg: #dbeafe;
-    --note-bg: #fefce8;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
+  html, body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    height: 100%;
   }
 
-  .sticky-top {
-    position: sticky;
+  /* ── FROZEN TOP BLOCK ── */
+  .frozen-top {
+    position: fixed;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    left: 0;
+    right: 0;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   }
 
   .header {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    padding: 28px 40px 24px;
+    padding: 20px 40px 16px;
     position: relative;
     overflow: hidden;
   }
@@ -63,13 +65,13 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .header h1 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
   .header-meta {
     font-size: 12px;
@@ -80,17 +82,17 @@
   }
   .header-meta span strong { color: rgba(255,255,255,0.8); }
 
-  .sticky-controls {
+  .filter-bar {
     background: var(--white);
     border-bottom: 1px solid #e5e7eb;
-    padding: 12px 40px;
+    padding: 10px 40px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     align-items: center;
   }
   .filter-btn {
-    padding: 7px 16px;
+    padding: 6px 14px;
     border-radius: 8px;
     border: 1.5px solid #d1d5db;
     background: var(--white);
@@ -104,7 +106,7 @@
   .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
   .search-input {
     margin-left: auto;
-    padding: 7px 14px;
+    padding: 6px 14px;
     border-radius: 8px;
     border: 1.5px solid #d1d5db;
     font-size: 13px;
@@ -114,46 +116,33 @@
   }
   .search-input:focus { border-color: var(--navy); }
 
-  .body { padding: 28px 40px; }
-
-  .stale-banner {
-    display: none;
-    background: var(--amber-bg);
-    border: 1px solid #fde68a;
-    border-radius: 10px;
-    padding: 10px 18px;
-    margin-bottom: 18px;
-    font-size: 13px;
-    color: #78350f;
-    font-weight: 600;
-  }
-  .stale-banner.visible { display: block; }
-
-  .stats {
+  .stats-bar {
+    background: var(--bg);
+    padding: 14px 40px 10px;
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 14px;
     flex-wrap: wrap;
   }
   .stat-card {
     background: var(--white);
-    border-radius: 12px;
-    padding: 18px 24px;
+    border-radius: 10px;
+    padding: 12px 20px;
     flex: 1;
-    min-width: 130px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    min-width: 120px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     border: 1px solid rgba(0,0,0,0.06);
   }
   .stat-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--subtext);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .stat-value {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--text);
     line-height: 1;
@@ -162,22 +151,19 @@
   .stat-card.red .stat-value { color: var(--red); }
   .stat-card.amber .stat-value { color: var(--amber); }
 
-  .health-bar-wrap {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 16px 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.06);
+  .health-bar-row {
+    background: var(--bg);
+    padding: 0 40px 12px;
+    border-bottom: 1px solid #e0e4ee;
   }
   .health-bar-label {
     font-size: 12px;
     font-weight: 600;
     color: var(--subtext);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .health-bar-track {
-    height: 10px;
+    height: 8px;
     background: var(--red-bg);
     border-radius: 99px;
     overflow: hidden;
@@ -189,6 +175,23 @@
     transition: width 0.6s ease;
   }
 
+  .stale-banner {
+    display: none;
+    background: var(--amber-bg);
+    border-bottom: 1px solid #fde68a;
+    padding: 8px 40px;
+    font-size: 12px;
+    color: #78350f;
+    font-weight: 600;
+  }
+  .stale-banner.visible { display: block; }
+
+  /* ── SCROLLABLE BODY ── */
+  .scroll-body {
+    padding: 0 40px 32px;
+    /* top padding set by JS to match frozen block height */
+  }
+
   .table-wrap {
     background: var(--white);
     border-radius: 12px;
@@ -196,13 +199,9 @@
     border: 1px solid rgba(0,0,0,0.06);
     overflow: hidden;
   }
+
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
-  thead {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
   thead tr {
     background: #f8fafc;
     border-bottom: 1px solid #e5e7eb;
@@ -217,7 +216,6 @@
     color: var(--subtext);
     white-space: nowrap;
     background: #f8fafc;
-    box-shadow: 0 1px 0 #e5e7eb;
   }
   td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
   tr:last-child td { border-bottom: none; }
@@ -231,7 +229,7 @@
     white-space: nowrap;
   }
 
-  /* Phone required row treatment */
+  /* Phone required row */
   tr.phone-required-row td {
     background: #fefce8;
     border-bottom: 1px solid #fde68a;
@@ -240,9 +238,7 @@
     border-left: 3px solid #b45309;
     padding-left: 13px;
   }
-  tr.phone-required-row .state-name {
-    color: #412402;
-  }
+  tr.phone-required-row .state-name { color: #412402; }
 
   .phone-call-badge {
     display: inline-flex;
@@ -282,28 +278,24 @@
   .url-cell { max-width: 220px; }
   .response-time { font-size: 11px; color: var(--subtext); margin-top: 3px; }
 
-  .notes-cell {
-    font-size: 11px;
-    color: var(--red);
-    max-width: 200px;
-    line-height: 1.4;
-  }
+  .notes-cell { font-size: 11px; color: var(--red); max-width: 200px; line-height: 1.4; }
   .notes-cell.empty { color: var(--subtext); }
 
   .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--subtext); }
   .empty-state { text-align: center; padding: 48px; color: var(--subtext); font-size: 14px; }
 
   @media (max-width: 900px) {
-    .body { padding: 20px 16px; }
-    .header { padding: 20px 16px; }
-    .sticky-controls { padding: 10px 16px; }
+    .header, .filter-bar, .stats-bar, .health-bar-row, .stale-banner { padding-left: 16px; padding-right: 16px; }
+    .scroll-body { padding-left: 16px; padding-right: 16px; }
     .search-input { width: 100%; margin-left: 0; }
   }
 </style>
 </head>
 <body>
 
-<div class="sticky-top">
+<!-- FROZEN BLOCK -->
+<div class="frozen-top" id="frozen-top">
+
   <div class="header">
     <div class="header-label">USC · ABS · Internal Tool V1.3</div>
     <h1>State Bar Link Monitor</h1>
@@ -315,7 +307,7 @@
     </div>
   </div>
 
-  <div class="sticky-controls">
+  <div class="filter-bar">
     <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
     <button class="filter-btn" onclick="setFilter('active', this)">Active Only</button>
     <button class="filter-btn" onclick="setFilter('inactive', this)">Inactive Only</button>
@@ -323,15 +315,12 @@
     <button class="filter-btn" onclick="setFilter('has_alt', this)">Has Alt Link</button>
     <input class="search-input" type="text" placeholder="Search state…" oninput="setSearch(this.value)">
   </div>
-</div>
-
-<div class="body">
 
   <div class="stale-banner" id="stale-banner">
-    ⚠ Live data unavailable — showing last cached results. The scheduled workflow may not have run yet. Data will refresh automatically on next successful scan.
+    ⚠ Live data unavailable — showing last cached results. Data will refresh automatically on next successful scan.
   </div>
 
-  <div class="stats">
+  <div class="stats-bar">
     <div class="stat-card">
       <div class="stat-label">Total Entries</div>
       <div class="stat-value" id="stat-total">—</div>
@@ -350,12 +339,18 @@
     </div>
   </div>
 
-  <div class="health-bar-wrap">
+  <div class="health-bar-row">
     <div class="health-bar-label" id="health-label">Loading health data…</div>
     <div class="health-bar-track">
       <div class="health-bar-fill" id="health-fill" style="width:0%"></div>
     </div>
   </div>
+
+</div>
+<!-- END FROZEN BLOCK -->
+
+<!-- SCROLLABLE CONTENT -->
+<div class="scroll-body" id="scroll-body">
 
   <div class="table-wrap">
     <table>
@@ -376,16 +371,24 @@
     </table>
   </div>
 
-</div>
+  <div class="footer">
+    USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team
+  </div>
 
-<div class="footer">
-  USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team
 </div>
 
 <script>
   let allResults = [];
   let currentFilter = 'all';
   let currentSearch = '';
+
+  // Set scroll-body top padding to match frozen block height
+  function adjustPadding() {
+    const frozenH = document.getElementById('frozen-top').offsetHeight;
+    document.getElementById('scroll-body').style.paddingTop = (frozenH + 16) + 'px';
+  }
+
+  window.addEventListener('resize', adjustPadding);
 
   async function loadResults() {
     try {
@@ -397,12 +400,13 @@
     } catch (e) {
       const cached = localStorage.getItem('abs_last_results');
       if (cached) {
-        const data = JSON.parse(cached);
-        renderData(data, true);
+        renderData(JSON.parse(cached), true);
       } else {
         document.getElementById('last-scan').textContent = '—';
+        document.getElementById('health-label').textContent = 'No data available';
         document.getElementById('table-body').innerHTML =
-          '<tr><td colspan="7" class="empty-state">No data available yet — the workflow has not run successfully. Please trigger it manually from GitHub Actions.</td></tr>';
+          '<tr><td colspan="7" class="empty-state">No data available yet — please trigger the workflow manually from GitHub Actions.</td></tr>';
+        adjustPadding();
       }
     }
   }
@@ -434,6 +438,9 @@
 
     allResults = data.results;
     renderTable();
+
+    // Adjust after data renders (stale banner may have toggled)
+    setTimeout(adjustPadding, 50);
   }
 
   function formatDate(iso) {
@@ -485,7 +492,6 @@
     if (currentSearch) {
       rows = rows.filter(r => r.state.toLowerCase().includes(currentSearch));
     }
-
     if (currentFilter === 'active') {
       rows = rows.filter(r => r.url_status === 'active');
     } else if (currentFilter === 'inactive') {
