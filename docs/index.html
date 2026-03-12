@@ -116,6 +116,19 @@
 
   .body { padding: 28px 40px; }
 
+  .stale-banner {
+    display: none;
+    background: var(--amber-bg);
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #78350f;
+    font-weight: 600;
+  }
+  .stale-banner.visible { display: block; }
+
   .stats {
     display: flex;
     gap: 16px;
@@ -271,7 +284,7 @@
 
 <div class="sticky-top">
   <div class="header">
-    <div class="header-label">USC · ABS · Internal Tool V1.2</div>
+    <div class="header-label">USC · ABS · Internal Tool V1.3</div>
     <h1>State Bar Link Monitor</h1>
     <div class="header-meta">
       <span><strong>Process:</strong> Attorney Bar Search (ABS)</span>
@@ -292,6 +305,10 @@
 </div>
 
 <div class="body">
+
+  <div class="stale-banner" id="stale-banner">
+    ⚠ Live data unavailable — showing last cached results. The scheduled workflow may not have run yet. Data will refresh automatically on next successful scan.
+  </div>
 
   <div class="stats">
     <div class="stat-card">
@@ -352,31 +369,50 @@
   async function loadResults() {
     try {
       const res = await fetch('results.json?_=' + Date.now());
+      if (!res.ok) throw new Error('fetch failed');
       const data = await res.json();
-
-      document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
-      document.getElementById('stat-total').textContent = data.total;
-
-      const stateActive = data.results.filter(r =>
-        r.url_status === 'active' || r.url_alt_status === 'active'
-      ).length;
-      const stateInactive = data.total - stateActive;
-
-      document.getElementById('stat-active').textContent = stateActive;
-      document.getElementById('stat-inactive').textContent = stateInactive;
-      document.getElementById('stat-phone').textContent = data.phone_required;
-
-      const pct = data.total ? Math.round((stateActive / data.total) * 100) : 0;
-      document.getElementById('health-fill').style.width = pct + '%';
-      document.getElementById('health-label').textContent =
-        `Overall Link Health: ${pct}% — ${stateActive} of ${data.total} states have at least one working link`;
-
-      allResults = data.results;
-      renderTable();
+      localStorage.setItem('abs_last_results', JSON.stringify(data));
+      renderData(data, false);
     } catch (e) {
-      document.getElementById('table-body').innerHTML =
-        '<tr><td colspan="7" class="empty-state">Could not load results.json — run the workflow first.</td></tr>';
+      const cached = localStorage.getItem('abs_last_results');
+      if (cached) {
+        const data = JSON.parse(cached);
+        renderData(data, true);
+      } else {
+        document.getElementById('last-scan').textContent = '—';
+        document.getElementById('table-body').innerHTML =
+          '<tr><td colspan="7" class="empty-state">No data available yet — the workflow has not run successfully. Please trigger it manually from GitHub Actions.</td></tr>';
+      }
     }
+  }
+
+  function renderData(data, isStale) {
+    if (isStale) {
+      document.getElementById('stale-banner').classList.add('visible');
+      document.getElementById('last-scan').textContent = formatDate(data.scanned_at) + ' ⚠ cached';
+    } else {
+      document.getElementById('stale-banner').classList.remove('visible');
+      document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
+    }
+
+    document.getElementById('stat-total').textContent = data.total;
+
+    const stateActive = data.results.filter(r =>
+      r.url_status === 'active' || r.url_alt_status === 'active'
+    ).length;
+    const stateInactive = data.total - stateActive;
+
+    document.getElementById('stat-active').textContent = stateActive;
+    document.getElementById('stat-inactive').textContent = stateInactive;
+    document.getElementById('stat-phone').textContent = data.phone_required;
+
+    const pct = data.total ? Math.round((stateActive / data.total) * 100) : 0;
+    document.getElementById('health-fill').style.width = pct + '%';
+    document.getElementById('health-label').textContent =
+      `Overall Link Health: ${pct}% — ${stateActive} of ${data.total} states have at least one working link`;
+
+    allResults = data.results;
+    renderTable();
   }
 
   function formatDate(iso) {
@@ -412,9 +448,6 @@
     }
     if (status === 'no_alt') {
       return `<span class="status-pill no-alt">No alt link</span>`;
-    }
-    if (status === null || status === undefined) {
-      return `<span class="status-pill none">—</span>`;
     }
     return `<span class="status-pill none">—</span>`;
   }
