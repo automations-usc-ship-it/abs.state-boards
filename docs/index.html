@@ -182,7 +182,7 @@
     transition: width 0.6s ease;
   }
 
-  /* Column header row — lives inside frozen block, styled to match table */
+  /* Column header row inside frozen block */
   .col-header-row {
     background: #f8fafc;
     border-bottom: 2px solid #e5e7eb;
@@ -203,6 +203,15 @@
     text-overflow: ellipsis;
   }
 
+  /* Column widths — must match td widths exactly */
+  .ch:nth-child(1), td:nth-child(1) { width: 14%; }
+  .ch:nth-child(2), td:nth-child(2) { width: 11%; text-align: center; }
+  .ch:nth-child(3), td:nth-child(3) { width: 11%; }
+  .ch:nth-child(4), td:nth-child(4) { width: 18%; }
+  .ch:nth-child(5), td:nth-child(5) { width: 18%; }
+  .ch:nth-child(6), td:nth-child(6) { width: 11%; }
+  .ch:nth-child(7), td:nth-child(7) { width: 17%; }
+
   /* ── SCROLL AREA ── */
   #scroll-body {
     padding: 0 40px 40px;
@@ -217,35 +226,17 @@
     overflow: hidden;
   }
 
-  /* Table must match col-header-row layout exactly */
   table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
     table-layout: fixed;
   }
-  table thead { display: none; } /* hidden — we use the frozen col-header-row instead */
+  table thead { display: none; }
   td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; overflow: hidden; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbfd; }
   tr.phone-required-row:hover td { background: #fef9c3; }
-
-  /* Column widths — must match .ch widths exactly */
-  td:nth-child(1) { width: 14%; }
-  td:nth-child(2) { width: 11%; }
-  td:nth-child(3) { width: 11%; }
-  td:nth-child(4) { width: 18%; }
-  td:nth-child(5) { width: 18%; }
-  td:nth-child(6) { width: 11%; }
-  td:nth-child(7) { width: 17%; }
-
-  .ch:nth-child(1) { width: 14%; }
-  .ch:nth-child(2) { width: 11%; }
-  .ch:nth-child(3) { width: 11%; }
-  .ch:nth-child(4) { width: 18%; }
-  .ch:nth-child(5) { width: 18%; }
-  .ch:nth-child(6) { width: 11%; }
-  .ch:nth-child(7) { width: 17%; }
 
   .state-name { font-weight: 700; color: var(--text); display: block; white-space: nowrap; }
 
@@ -268,7 +259,12 @@
     white-space: nowrap;
   }
 
-  .phone-cell { font-size: 12px; color: var(--subtext); white-space: nowrap; }
+  .phone-cell {
+    font-size: 12px;
+    color: var(--subtext);
+    white-space: nowrap;
+    text-align: center;
+  }
   tr.phone-required-row .phone-cell { color: #633806; }
 
   .status-pill {
@@ -305,7 +301,7 @@
 <div id="frozen-top">
 
   <div class="header">
-    <div class="header-label">USC · ABS · Internal Tool V1.3</div>
+    <div class="header-label">USC · ABS · Internal Tool V2.3</div>
     <h1>State Bar Link Monitor</h1>
     <div class="header-meta">
       <span><strong>Process:</strong> Attorney Bar Search (ABS)</span>
@@ -354,10 +350,9 @@
     </div>
   </div>
 
-  <!-- Column headers — pinned here so they freeze with everything above -->
-  <div class="col-header-row" id="col-header-row">
+  <div class="col-header-row">
     <div class="ch">State / Territory</div>
-    <div class="ch">Phone</div>
+    <div class="ch" style="text-align:center;">Phone</div>
     <div class="ch">Primary Status</div>
     <div class="ch">Trainual Link</div>
     <div class="ch">SMD Alternative Link</div>
@@ -389,7 +384,7 @@
     </table>
   </div>
   <div class="footer">
-    USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team
+    USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team · v2.3
   </div>
 </div>
 
@@ -517,8 +512,8 @@
         ${stateCell}
         <td class="phone-cell">${phoneHtml}</td>
         <td>${statusPill(r.url_status, r.url_http_code, r.url_response_ms)}</td>
-        <td class="url-cell">${urlCell(r.url, null)}</td>
-        <td class="url-cell">${urlCell(r.url_alt, r.url_alt_label)}</td>
+        <td>${urlCell(r.url, null)}</td>
+        <td>${urlCell(r.url_alt, r.url_alt_label)}</td>
         <td>${statusPill(r.url_alt_status, r.url_alt_http_code, r.url_alt_response_ms)}</td>
         <td class="${notesClass}">${r.notes || '—'}</td>
       </tr>`;
