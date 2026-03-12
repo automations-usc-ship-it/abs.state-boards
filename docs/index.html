@@ -9,7 +9,6 @@
     --navy: #0f1f3d;
     --navy-mid: #1a3260;
     --gold: #c8922a;
-    --gold-light: #e8b84b;
     --white: #ffffff;
     --bg: #f2f4f8;
     --text: #1a2540;
@@ -23,31 +22,27 @@
     --gray: #6b7280;
     --gray-bg: #f3f4f6;
     --blue: #2563eb;
-    --blue-bg: #dbeafe;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
+  body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    height: 100%;
   }
 
-  /* ── FROZEN TOP BLOCK ── */
-  .frozen-top {
+  /* ── FROZEN BLOCK ── */
+  #frozen-top {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   }
 
   .header {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    padding: 20px 40px 16px;
+    padding: 18px 40px 14px;
     position: relative;
     overflow: hidden;
   }
@@ -55,9 +50,10 @@
     content: '';
     position: absolute;
     top: -40px; right: -40px;
-    width: 200px; height: 200px;
+    width: 180px; height: 180px;
     border-radius: 50%;
     background: rgba(200,146,42,0.1);
+    pointer-events: none;
   }
   .header-label {
     font-size: 11px;
@@ -65,27 +61,27 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
   .header h1 {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .header-meta {
     font-size: 12px;
     color: rgba(255,255,255,0.5);
     display: flex;
-    gap: 24px;
+    gap: 20px;
     flex-wrap: wrap;
   }
-  .header-meta span strong { color: rgba(255,255,255,0.8); }
+  .header-meta span strong { color: rgba(255,255,255,0.85); }
 
   .filter-bar {
     background: var(--white);
     border-bottom: 1px solid #e5e7eb;
-    padding: 10px 40px;
+    padding: 9px 40px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -110,57 +106,68 @@
     border-radius: 8px;
     border: 1.5px solid #d1d5db;
     font-size: 13px;
-    width: 220px;
+    width: 200px;
     outline: none;
     transition: border-color 0.15s;
   }
   .search-input:focus { border-color: var(--navy); }
 
+  .stale-banner {
+    display: none;
+    background: var(--amber-bg);
+    border-bottom: 1px solid #fde68a;
+    padding: 7px 40px;
+    font-size: 12px;
+    color: #78350f;
+    font-weight: 600;
+  }
+  .stale-banner.visible { display: block; }
+
   .stats-bar {
     background: var(--bg);
-    padding: 14px 40px 10px;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 40px 10px;
     display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
+    gap: 12px;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #dde3ee;
   }
   .stat-card {
     background: var(--white);
     border-radius: 10px;
-    padding: 12px 20px;
+    padding: 10px 18px;
     flex: 1;
-    min-width: 120px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    min-width: 0;
     border: 1px solid rgba(0,0,0,0.06);
   }
   .stat-label {
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
     color: var(--subtext);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
+    white-space: nowrap;
   }
   .stat-value {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--text);
     line-height: 1;
   }
   .stat-card.green .stat-value { color: var(--green); }
-  .stat-card.red .stat-value { color: var(--red); }
+  .stat-card.red   .stat-value { color: var(--red); }
   .stat-card.amber .stat-value { color: var(--amber); }
 
   .health-bar-row {
     background: var(--bg);
-    padding: 0 40px 12px;
-    border-bottom: 1px solid #e0e4ee;
+    padding: 0 40px 10px;
+    border-bottom: 1px solid #d0d6e4;
   }
   .health-bar-label {
     font-size: 12px;
     font-weight: 600;
     color: var(--subtext);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
   .health-bar-track {
     height: 8px;
@@ -175,69 +182,75 @@
     transition: width 0.6s ease;
   }
 
-  .stale-banner {
-    display: none;
-    background: var(--amber-bg);
-    border-bottom: 1px solid #fde68a;
-    padding: 8px 40px;
-    font-size: 12px;
-    color: #78350f;
-    font-weight: 600;
-  }
-  .stale-banner.visible { display: block; }
-
-  /* ── SCROLLABLE BODY ── */
-  .scroll-body {
-    padding: 0 40px 32px;
-    /* top padding set by JS to match frozen block height */
-  }
-
-  .table-wrap {
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.06);
-    overflow: hidden;
-  }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
-  thead tr {
+  /* Column header row — lives inside frozen block, styled to match table */
+  .col-header-row {
     background: #f8fafc;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 2px solid #e5e7eb;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
   }
-  th {
-    padding: 12px 16px;
-    text-align: left;
+  .col-header-row .ch {
+    display: table-cell;
+    padding: 11px 16px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--subtext);
     white-space: nowrap;
-    background: #f8fafc;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+
+  /* ── SCROLL AREA ── */
+  #scroll-body {
+    padding: 0 40px 40px;
+  }
+
+  .table-wrap {
+    background: var(--white);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-top: none;
+    overflow: hidden;
+  }
+
+  /* Table must match col-header-row layout exactly */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+  table thead { display: none; } /* hidden — we use the frozen col-header-row instead */
+  td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; overflow: hidden; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #fafbfd; }
   tr.phone-required-row:hover td { background: #fef9c3; }
 
-  .state-name {
-    font-weight: 700;
-    color: var(--text);
-    display: block;
-    white-space: nowrap;
-  }
+  /* Column widths — must match .ch widths exactly */
+  td:nth-child(1) { width: 14%; }
+  td:nth-child(2) { width: 11%; }
+  td:nth-child(3) { width: 11%; }
+  td:nth-child(4) { width: 18%; }
+  td:nth-child(5) { width: 18%; }
+  td:nth-child(6) { width: 11%; }
+  td:nth-child(7) { width: 17%; }
 
-  /* Phone required row */
-  tr.phone-required-row td {
-    background: #fefce8;
-    border-bottom: 1px solid #fde68a;
-  }
-  tr.phone-required-row td:first-child {
-    border-left: 3px solid #b45309;
-    padding-left: 13px;
-  }
+  .ch:nth-child(1) { width: 14%; }
+  .ch:nth-child(2) { width: 11%; }
+  .ch:nth-child(3) { width: 11%; }
+  .ch:nth-child(4) { width: 18%; }
+  .ch:nth-child(5) { width: 18%; }
+  .ch:nth-child(6) { width: 11%; }
+  .ch:nth-child(7) { width: 17%; }
+
+  .state-name { font-weight: 700; color: var(--text); display: block; white-space: nowrap; }
+
+  tr.phone-required-row td { background: #fefce8; border-bottom: 1px solid #fde68a; }
+  tr.phone-required-row td:first-child { border-left: 3px solid #b45309; padding-left: 13px; }
   tr.phone-required-row .state-name { color: #412402; }
 
   .phone-call-badge {
@@ -259,42 +272,37 @@
   tr.phone-required-row .phone-cell { color: #633806; }
 
   .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 10px;
-    border-radius: 99px;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 99px;
+    font-size: 11px; font-weight: 700; white-space: nowrap;
   }
-  .status-pill.active { background: var(--green-bg); color: var(--green); }
-  .status-pill.inactive { background: var(--red-bg); color: var(--red); }
-  .status-pill.no-alt { background: var(--gray-bg); color: var(--gray); }
-  .status-pill.none { background: var(--gray-bg); color: var(--gray); font-style: italic; }
+  .status-pill.active   { background: var(--green-bg); color: var(--green); }
+  .status-pill.inactive { background: var(--red-bg);   color: var(--red); }
+  .status-pill.no-alt   { background: var(--gray-bg);  color: var(--gray); }
+  .status-pill.none     { background: var(--gray-bg);  color: var(--gray); font-style: italic; }
 
   .url-link { color: var(--blue); text-decoration: none; font-size: 12px; word-break: break-all; }
   .url-link:hover { text-decoration: underline; }
-  .url-cell { max-width: 220px; }
   .response-time { font-size: 11px; color: var(--subtext); margin-top: 3px; }
 
-  .notes-cell { font-size: 11px; color: var(--red); max-width: 200px; line-height: 1.4; }
+  .notes-cell { font-size: 11px; color: var(--red); line-height: 1.4; }
   .notes-cell.empty { color: var(--subtext); }
 
-  .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--subtext); }
+  .footer { text-align: center; padding: 24px 0 8px; font-size: 12px; color: var(--subtext); }
   .empty-state { text-align: center; padding: 48px; color: var(--subtext); font-size: 14px; }
 
   @media (max-width: 900px) {
-    .header, .filter-bar, .stats-bar, .health-bar-row, .stale-banner { padding-left: 16px; padding-right: 16px; }
-    .scroll-body { padding-left: 16px; padding-right: 16px; }
+    .header, .filter-bar, .stale-banner, .stats-bar, .health-bar-row { padding-left: 16px; padding-right: 16px; }
+    #scroll-body { padding-left: 16px; padding-right: 16px; }
     .search-input { width: 100%; margin-left: 0; }
+    .stats-bar { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
 
 <!-- FROZEN BLOCK -->
-<div class="frozen-top" id="frozen-top">
+<div id="frozen-top">
 
   <div class="header">
     <div class="header-label">USC · ABS · Internal Tool V1.3</div>
@@ -346,12 +354,22 @@
     </div>
   </div>
 
+  <!-- Column headers — pinned here so they freeze with everything above -->
+  <div class="col-header-row" id="col-header-row">
+    <div class="ch">State / Territory</div>
+    <div class="ch">Phone</div>
+    <div class="ch">Primary Status</div>
+    <div class="ch">Trainual Link</div>
+    <div class="ch">SMD Alternative Link</div>
+    <div class="ch">Alt Status</div>
+    <div class="ch">Special Notes</div>
+  </div>
+
 </div>
 <!-- END FROZEN BLOCK -->
 
 <!-- SCROLLABLE CONTENT -->
-<div class="scroll-body" id="scroll-body">
-
+<div id="scroll-body">
   <div class="table-wrap">
     <table>
       <thead>
@@ -370,11 +388,9 @@
       </tbody>
     </table>
   </div>
-
   <div class="footer">
     USClaims Pre-Settlement Funding · State Bar Link Monitor · Internal Use Only · Powered by SMDigital Automations Team
   </div>
-
 </div>
 
 <script>
@@ -382,71 +398,66 @@
   let currentFilter = 'all';
   let currentSearch = '';
 
-  // Set scroll-body top padding to match frozen block height
   function adjustPadding() {
-    const frozenH = document.getElementById('frozen-top').offsetHeight;
-    document.getElementById('scroll-body').style.paddingTop = (frozenH + 16) + 'px';
+    const h = document.getElementById('frozen-top').getBoundingClientRect().height;
+    document.getElementById('scroll-body').style.paddingTop = (h + 4) + 'px';
   }
 
   window.addEventListener('resize', adjustPadding);
+  window.addEventListener('load', adjustPadding);
 
   async function loadResults() {
     try {
       const res = await fetch('results.json?_=' + Date.now());
-      if (!res.ok) throw new Error('fetch failed');
+      if (!res.ok) throw new Error('failed');
       const data = await res.json();
       localStorage.setItem('abs_last_results', JSON.stringify(data));
       renderData(data, false);
-    } catch (e) {
-      const cached = localStorage.getItem('abs_last_results');
-      if (cached) {
-        renderData(JSON.parse(cached), true);
+    } catch(e) {
+      const raw = localStorage.getItem('abs_last_results');
+      if (raw) {
+        renderData(JSON.parse(raw), true);
       } else {
         document.getElementById('last-scan').textContent = '—';
-        document.getElementById('health-label').textContent = 'No data available';
+        document.getElementById('health-label').textContent = 'No scan data available';
         document.getElementById('table-body').innerHTML =
-          '<tr><td colspan="7" class="empty-state">No data available yet — please trigger the workflow manually from GitHub Actions.</td></tr>';
-        adjustPadding();
+          '<tr><td colspan="7" class="empty-state">No data yet — please trigger the workflow manually from GitHub Actions.</td></tr>';
+        requestAnimationFrame(() => requestAnimationFrame(adjustPadding));
       }
     }
   }
 
   function renderData(data, isStale) {
+    const banner = document.getElementById('stale-banner');
     if (isStale) {
-      document.getElementById('stale-banner').classList.add('visible');
+      banner.classList.add('visible');
       document.getElementById('last-scan').textContent = formatDate(data.scanned_at) + ' ⚠ cached';
     } else {
-      document.getElementById('stale-banner').classList.remove('visible');
+      banner.classList.remove('visible');
       document.getElementById('last-scan').textContent = formatDate(data.scanned_at);
     }
 
     document.getElementById('stat-total').textContent = data.total;
-
-    const stateActive = data.results.filter(r =>
+    const active = data.results.filter(r =>
       r.url_status === 'active' || r.url_alt_status === 'active'
     ).length;
-    const stateInactive = data.total - stateActive;
-
-    document.getElementById('stat-active').textContent = stateActive;
-    document.getElementById('stat-inactive').textContent = stateInactive;
+    document.getElementById('stat-active').textContent = active;
+    document.getElementById('stat-inactive').textContent = data.total - active;
     document.getElementById('stat-phone').textContent = data.phone_required;
 
-    const pct = data.total ? Math.round((stateActive / data.total) * 100) : 0;
+    const pct = data.total ? Math.round((active / data.total) * 100) : 0;
     document.getElementById('health-fill').style.width = pct + '%';
     document.getElementById('health-label').textContent =
-      `Overall Link Health: ${pct}% — ${stateActive} of ${data.total} states have at least one working link`;
+      `Overall Link Health: ${pct}% — ${active} of ${data.total} states have at least one working link`;
 
     allResults = data.results;
     renderTable();
-
-    // Adjust after data renders (stale banner may have toggled)
-    setTimeout(adjustPadding, 50);
+    requestAnimationFrame(() => requestAnimationFrame(adjustPadding));
   }
 
   function formatDate(iso) {
     if (!iso) return '—';
-    const d = new Date(iso);
-    return d.toLocaleString('en-US', {
+    return new Date(iso).toLocaleString('en-US', {
       month: 'short', day: 'numeric', year: 'numeric',
       hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
       timeZone: 'America/New_York'
@@ -466,17 +477,12 @@
   }
 
   function statusPill(status, code, ms) {
-    if (status === 'active') {
-      return `<div><span class="status-pill active">✓ Active</span>
-              ${code ? `<div class="response-time">HTTP ${code}${ms ? ' · ' + ms + 'ms' : ''}</div>` : ''}</div>`;
-    }
-    if (status === 'inactive') {
-      return `<div><span class="status-pill inactive">✗ Inactive</span>
-              ${code ? `<div class="response-time">HTTP ${code}</div>` : '<div class="response-time">No response</div>'}</div>`;
-    }
-    if (status === 'no_alt') {
+    if (status === 'active')
+      return `<div><span class="status-pill active">✓ Active</span>${code ? `<div class="response-time">HTTP ${code}${ms ? ' · ' + ms + 'ms' : ''}</div>` : ''}</div>`;
+    if (status === 'inactive')
+      return `<div><span class="status-pill inactive">✗ Inactive</span>${code ? `<div class="response-time">HTTP ${code}</div>` : '<div class="response-time">No response</div>'}</div>`;
+    if (status === 'no_alt')
       return `<span class="status-pill no-alt">No alt link</span>`;
-    }
     return `<span class="status-pill none">—</span>`;
   }
 
@@ -488,19 +494,11 @@
 
   function renderTable() {
     let rows = allResults;
-
-    if (currentSearch) {
-      rows = rows.filter(r => r.state.toLowerCase().includes(currentSearch));
-    }
-    if (currentFilter === 'active') {
-      rows = rows.filter(r => r.url_status === 'active');
-    } else if (currentFilter === 'inactive') {
-      rows = rows.filter(r => r.url_status === 'inactive');
-    } else if (currentFilter === 'phone') {
-      rows = rows.filter(r => r.phone_required);
-    } else if (currentFilter === 'has_alt') {
-      rows = rows.filter(r => r.url_alt && !r.url_alt.startsWith('No alternative'));
-    }
+    if (currentSearch) rows = rows.filter(r => r.state.toLowerCase().includes(currentSearch));
+    if (currentFilter === 'active')        rows = rows.filter(r => r.url_status === 'active');
+    else if (currentFilter === 'inactive') rows = rows.filter(r => r.url_status === 'inactive');
+    else if (currentFilter === 'phone')    rows = rows.filter(r => r.phone_required);
+    else if (currentFilter === 'has_alt')  rows = rows.filter(r => r.url_alt && !r.url_alt.startsWith('No alternative'));
 
     if (!rows.length) {
       document.getElementById('table-body').innerHTML =
@@ -508,36 +506,23 @@
       return;
     }
 
-    const html = rows.map(r => {
+    document.getElementById('table-body').innerHTML = rows.map(r => {
       const isPhone = r.phone_required;
-      const rowClass = isPhone ? ' class="phone-required-row"' : '';
-
       const stateCell = isPhone
-        ? `<td>
-             <span class="state-name">${r.state}</span>
-             <span class="phone-call-badge">&#9990; Call required</span>
-           </td>`
+        ? `<td><span class="state-name">${r.state}</span><span class="phone-call-badge">&#9990; Call required</span></td>`
         : `<td><span class="state-name">${r.state}</span></td>`;
-
-      const phoneHtml = r.phone
-        ? `${r.phone}${r.phone_alt ? '<br>' + r.phone_alt : ''}`
-        : '—';
-
-      const notesContent = r.notes || '—';
+      const phoneHtml = r.phone ? `${r.phone}${r.phone_alt ? '<br>' + r.phone_alt : ''}` : '—';
       const notesClass = r.notes ? 'notes-cell' : 'notes-cell empty';
-
-      return `<tr${rowClass}>
+      return `<tr${isPhone ? ' class="phone-required-row"' : ''}>
         ${stateCell}
         <td class="phone-cell">${phoneHtml}</td>
         <td>${statusPill(r.url_status, r.url_http_code, r.url_response_ms)}</td>
         <td class="url-cell">${urlCell(r.url, null)}</td>
         <td class="url-cell">${urlCell(r.url_alt, r.url_alt_label)}</td>
         <td>${statusPill(r.url_alt_status, r.url_alt_http_code, r.url_alt_response_ms)}</td>
-        <td class="${notesClass}">${notesContent}</td>
+        <td class="${notesClass}">${r.notes || '—'}</td>
       </tr>`;
     }).join('');
-
-    document.getElementById('table-body').innerHTML = html;
   }
 
   loadResults();
