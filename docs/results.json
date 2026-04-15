@@ -1,5 +1,5 @@
 {
-  "scanned_at": "2026-04-15T04:34:08.358676+00:00",
+  "scanned_at": "2026-04-15T14:58:23.823991+00:00",
   "total": 53,
   "active": 48,
   "inactive": 5,
@@ -14,7 +14,7 @@
       "url": "https://www.alabar.org/find-a-member/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 637,
+      "url_response_ms": 468,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -30,7 +30,7 @@
       "url": "https://alaskabar.org/for-lawyers/member-directories/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 207,
+      "url_response_ms": 1624,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -46,12 +46,12 @@
       "url": "https://www.azbar.org/for-legal-professionals/practice-tools-management/member-directory/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 212,
+      "url_response_ms": 834,
       "url_alt": "https://www.azd.uscourts.gov/admitted-attorneys",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 185
+      "url_alt_response_ms": 84
     },
     {
       "state": "Arkansas",
@@ -67,7 +67,7 @@
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 372
+      "url_alt_response_ms": 456
     },
     {
       "state": "California",
@@ -78,7 +78,7 @@
       "url": "https://apps.calbar.ca.gov/attorney/LicenseeSearch/QuickSearch",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 290,
+      "url_response_ms": 314,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -94,12 +94,12 @@
       "url": "https://www.coloradolegalregulation.com/attorney-search/",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 234,
+      "url_response_ms": 229,
       "url_alt": "https://www.cod.uscourts.gov/CMECF/AttorneyStatus.aspx",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 410
+      "url_alt_response_ms": 366
     },
     {
       "state": "Connecticut",
@@ -115,7 +115,7 @@
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 403,
-      "url_alt_response_ms": 299
+      "url_alt_response_ms": 149
     },
     {
       "state": "Delaware",
@@ -126,7 +126,7 @@
       "url": "https://www.dsba.org/resources/public-resources/#xDIRECTORY",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 816,
+      "url_response_ms": 791,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -142,12 +142,12 @@
       "url": "https://my.dcbar.org/memberdirectory",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 1323,
+      "url_response_ms": 1136,
       "url_alt": "https://my.dcbar.org/MemberDirectoryPage",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 952
+      "url_alt_response_ms": 1018
     },
     {
       "state": "Florida",
@@ -158,7 +158,7 @@
       "url": "https://www.floridabar.org/directories/find-mbr/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 791,
+      "url_response_ms": 1115,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -174,12 +174,12 @@
       "url": "https://www.gabar.org/member-directory",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 77,
+      "url_response_ms": 236,
       "url_alt": "https://gabar.reliaguide.com/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 172
+      "url_alt_response_ms": 217
     },
     {
       "state": "Guam",
@@ -190,7 +190,7 @@
       "url": "https://guambar.org/system/homes/directory_listing?pay_for=Attorney",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 678,
+      "url_response_ms": 515,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -206,7 +206,7 @@
       "url": "https://hsba.org/member-directory?",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 611,
+      "url_response_ms": 577,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -222,7 +222,7 @@
       "url": "https://isb.idaho.gov/licensing-mcle/attorney-roster-search/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 1018,
+      "url_response_ms": 1038,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -238,7 +238,7 @@
       "url": "https://www.iardc.org/Lawyer/Search",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 376,
+      "url_response_ms": 403,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -254,7 +254,7 @@
       "url": "https://courtapps.in.gov/rollofattorneys/search",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 284,
+      "url_response_ms": 317,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -270,7 +270,7 @@
       "url": "https://www.iacourtcommissions.org/ords/f?p=106:10:112992182223313:::PR,10::",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 321,
+      "url_response_ms": 234,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -286,12 +286,12 @@
       "url": "https://directory-kard.kscourts.gov/",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 56,
+      "url_response_ms": 66,
       "url_alt": "https://ecf.ksd.uscourts.gov/cgi-bin/BarLookup.pl",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 377
+      "url_alt_response_ms": 376
     },
     {
       "state": "Kentucky",
@@ -302,7 +302,7 @@
       "url": "https://kybar.org/For-Public/Find-a-Lawyer",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 215,
+      "url_response_ms": 431,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -334,7 +334,7 @@
       "url": "https://apps.web.maine.gov/cgi-bin/online/maine_bar/attorney_directory.pl",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 1131,
+      "url_response_ms": 754,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -350,12 +350,12 @@
       "url": "https://www.mdcourts.gov/attysearch",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 165,
+      "url_response_ms": 195,
       "url_alt": "https://www.courts.state.md.us/attysearch",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 227
+      "url_alt_response_ms": 432
     },
     {
       "state": "Massachusetts",
@@ -366,12 +366,12 @@
       "url": "https://www.massbbo.org/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 622,
+      "url_response_ms": 690,
       "url_alt": "https://forms.mad.uscourts.gov/bar-search.html",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 51
+      "url_alt_response_ms": 49
     },
     {
       "state": "Michigan",
@@ -382,7 +382,7 @@
       "url": "https://www.michbar.org/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 294,
+      "url_response_ms": 276,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -398,12 +398,12 @@
       "url": "https://lprb.mncourts.gov/LawyerSearch/pages/Default.aspx",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 1733,
+      "url_response_ms": 1739,
       "url_alt": "https://mars.courts.state.mn.us/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 297
+      "url_alt_response_ms": 250
     },
     {
       "state": "Mississippi",
@@ -414,12 +414,12 @@
       "url": "https://msbar.reliaguide.com/home",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 215,
+      "url_response_ms": 155,
       "url_alt": "https://courts.ms.gov/bar/barroll/barroll.php",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 104
+      "url_alt_response_ms": 116
     },
     {
       "state": "Missouri",
@@ -430,12 +430,12 @@
       "url": "https://mobar.org/public/LawyerDirectory.aspx",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 616,
+      "url_response_ms": 777,
       "url_alt": "https://ecf.moed.uscourts.gov/cgi-bin/moedBarLookup.pl",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 378
+      "url_alt_response_ms": 339
     },
     {
       "state": "Montana",
@@ -446,12 +446,12 @@
       "url": "https://www.montanabar.org/Membership-Regulatory/Member-Directory",
       "url_status": "inactive",
       "url_http_code": 404,
-      "url_response_ms": 210,
+      "url_response_ms": 377,
       "url_alt": "https://www.montanabar.org/For-Attorneys/Attorney-Directory",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 196
+      "url_alt_response_ms": 377
     },
     {
       "state": "Nebraska",
@@ -462,12 +462,12 @@
       "url": "https://www.nebar.com/search/",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 303,
+      "url_response_ms": 183,
       "url_alt": "https://attorneys.nejudicial.gov/member-search",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 227
+      "url_alt_response_ms": 220
     },
     {
       "state": "Nevada",
@@ -478,7 +478,7 @@
       "url": "https://nvbar.org/for-the-public/find-a-lawyer/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 396,
+      "url_response_ms": 366,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -494,7 +494,7 @@
       "url": "https://www.nhbar.org/find-a-lawyer/",
       "url_status": "inactive",
       "url_http_code": 404,
-      "url_response_ms": 1069,
+      "url_response_ms": 833,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -510,7 +510,7 @@
       "url": "https://portalattysearch-cloud.njcourts.gov/prweb/PRServletPublicAuth/app/Attorney/-amRUHgepTwWWiiBQpI9_yQNuum4oN16*/!STANDARD?AppName=AttorneySearch",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 55,
+      "url_response_ms": 61,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -526,12 +526,12 @@
       "url": "https://www.sbnm.org/For-Public/I-Need-a-Lawyer/Online-Bar-Directory",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 643,
+      "url_response_ms": 612,
       "url_alt": "https://nmdisboard.org/for-the-public/search-attorney-or-discipline/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 307,
-      "url_alt_response_ms": 201
+      "url_alt_response_ms": 38
     },
     {
       "state": "New York",
@@ -542,7 +542,7 @@
       "url": "https://iapps.courts.state.ny.us/attorneyservices/search?1",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 93,
+      "url_response_ms": 64,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -558,7 +558,7 @@
       "url": "https://portal.ncbar.gov/verification/search.aspx?_gl=1*166fwon*_ga*MTEwMTc4MjA3Ny4xNzcyNDY1MzU4*_ga_ZNZ17QRZ0C*czE3NzMwNjU0NzYkbzMkZzAkdDE3NzMwNjU0NzYkajYwJGwwJGgw",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 68,
+      "url_response_ms": 69,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -574,7 +574,7 @@
       "url": "https://www.ndcourts.gov/lawyers",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 911,
+      "url_response_ms": 306,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -590,12 +590,12 @@
       "url": "https://www.supremecourt.ohio.gov/attorneysearch/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 223,
+      "url_response_ms": 165,
       "url_alt": "https://www.ohiobar.org/public-resources/attorneydirectory/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 405
+      "url_alt_response_ms": 312
     },
     {
       "state": "Oklahoma",
@@ -606,7 +606,7 @@
       "url": "https://www.okbar.org/members/directory/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 3938,
+      "url_response_ms": 3876,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -622,7 +622,7 @@
       "url": "https://www.osbar.org/members/membersearch_start.asp",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 586,
+      "url_response_ms": 685,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -638,7 +638,7 @@
       "url": "https://www.padisciplinaryboard.org/for-the-public/look-up-attorney",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 1463,
+      "url_response_ms": 1633,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -654,12 +654,12 @@
       "url": "https://www.courts.ri.gov/programs-services/Pages/Disciplinary-Board.aspx",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 253,
+      "url_response_ms": 208,
       "url_alt": "https://ribar.com/?pg=memberdirectory",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 307
+      "url_alt_response_ms": 510
     },
     {
       "state": "South Carolina",
@@ -670,12 +670,12 @@
       "url": "https://www.scbar.org/for-lawyers/quicklinks/member-directory/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 74,
+      "url_response_ms": 276,
       "url_alt": "https://www.sccourts.org/attorneys/",
       "url_alt_label": null,
-      "url_alt_status": "active",
-      "url_alt_http_code": 200,
-      "url_alt_response_ms": 299
+      "url_alt_status": "inactive",
+      "url_alt_http_code": 406,
+      "url_alt_response_ms": 249
     },
     {
       "state": "South Dakota",
@@ -686,7 +686,7 @@
       "url": "https://www.statebarofsouthdakota.com/page/attorney-search",
       "url_status": "inactive",
       "url_http_code": 404,
-      "url_response_ms": 504,
+      "url_response_ms": 581,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -702,12 +702,12 @@
       "url": "https://www.tbpr.org/for-the-public/online-attorney-directory",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 333,
+      "url_response_ms": 306,
       "url_alt": "https://www.tba.org/?pg=MemberDirectory",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 352
+      "url_alt_response_ms": 570
     },
     {
       "state": "Texas",
@@ -718,12 +718,12 @@
       "url": "https://www.texasbar.com/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 242,
+      "url_response_ms": 133,
       "url_alt": "https://attorneyfinder.texaslegal.org/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 404
+      "url_alt_response_ms": 407
     },
     {
       "state": "Utah",
@@ -734,7 +734,7 @@
       "url": "https://services.utahbar.org/Member-Directory",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 351,
+      "url_response_ms": 376,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -749,13 +749,13 @@
       "notes": "Provides a downloadable PDF list.",
       "url": "https://www.vermontjudiciary.org/sites/default/files/documents/rptAttorneys_Good_Standing_34.pdf",
       "url_status": "active",
-      "url_http_code": 403,
-      "url_response_ms": 412,
+      "url_http_code": 200,
+      "url_response_ms": 356,
       "url_alt": "https://www.vermontjustice.org/?pg=FindaLawyer",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 629
+      "url_alt_response_ms": 371
     },
     {
       "state": "Virgin Islands",
@@ -766,7 +766,7 @@
       "url": "https://www.usvibar.org/search/custom.asp?id=1924",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 430,
+      "url_response_ms": 263,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -782,7 +782,7 @@
       "url": "https://vsb.org/Site/Shared_Content/Directory/va-lawyer-directory.aspx",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 441,
+      "url_response_ms": 280,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -798,7 +798,7 @@
       "url": "https://www.mywsba.org/personifyebusiness/LegalDirectory.aspx",
       "url_status": "active",
       "url_http_code": 302,
-      "url_response_ms": 3675,
+      "url_response_ms": 3208,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
@@ -814,12 +814,12 @@
       "url": "https://wvbar.org/directory/",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 779,
+      "url_response_ms": 323,
       "url_alt": "https://mywvbar.org/membership-search-members",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 403,
-      "url_alt_response_ms": 66
+      "url_alt_response_ms": 225
     },
     {
       "state": "Wisconsin",
@@ -830,12 +830,12 @@
       "url": "https://www.wicourts.gov/courts/offices/olr.htm",
       "url_status": "active",
       "url_http_code": 200,
-      "url_response_ms": 180,
+      "url_response_ms": 195,
       "url_alt": "https://lawyerhistory.wicourts.gov/",
       "url_alt_label": null,
       "url_alt_status": "active",
       "url_alt_http_code": 200,
-      "url_alt_response_ms": 276
+      "url_alt_response_ms": 349
     },
     {
       "state": "Wyoming",
@@ -846,7 +846,7 @@
       "url": "https://www.wyomingbar.org/for-the-public/hire-a-lawyer/lawyer-search/",
       "url_status": "active",
       "url_http_code": 403,
-      "url_response_ms": 90,
+      "url_response_ms": 265,
       "url_alt": null,
       "url_alt_label": null,
       "url_alt_status": null,
